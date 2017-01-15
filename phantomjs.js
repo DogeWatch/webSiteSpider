@@ -141,7 +141,7 @@ if (system.args.length !== 2){
                         }
                     }
                 }
-                links += link.substr(0, link.length-1) + '\n';
+                links += link.substr(0, link.length-1) + '\n';     
             }
 
             document.addEventListener('DOMNodeInserted', function(e) {

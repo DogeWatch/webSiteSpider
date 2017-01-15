@@ -69,6 +69,7 @@ class crawler(object):
             self.urls[urldict['host']] = {urldict['path']:[urldict['param']]}
             return True
         else:
+            #判断是否为伪静态路径
             index = self.find_last(urldict['path'], '/')
             if urldict['path'][index+1:].isdigit():
                 urldict['path'] = urldict['path'][:index+1]
@@ -130,7 +131,7 @@ class crawler(object):
         #print '[*] Current url is %s' % url
         try:
             child = subprocess32.Popen(['phantomjs', 'phantomjs.js', url], stdout=subprocess32.PIPE)
-            output = child.communicate(None, timeout=10)
+            output = child.communicate(None, timeout=30)
             #output = subprocess32.check_output(['phantomjs', 'phantomjs.js', url], timeout=10)
         except Exception, e:
             os.kill(child.pid,9)
