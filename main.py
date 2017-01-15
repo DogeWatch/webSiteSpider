@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 # coding=utf-8
-import subprocess
+import subprocess32
 from Queue import Queue
 from threading import Thread
 from threadpool import makeRequests, ThreadPool
@@ -122,10 +122,13 @@ class Crawler(object):
     def work(self, url):
         print '[*] Current url is %s' % url
         try:
-            child = subprocess.Popen(['phantomjs', 'phantomjs.js', url], stdout=subprocess.PIPE)
+            child = subprocess32.Popen(['phantomjs', 'phantomjs.js', url], stdout=subprocess32.PIPE)
+            output = child.communicate(None, timeout=10)
+            #output = subprocess32.check_output(['phantomjs', 'phantomjs.js', url], timeout=10)
         except Exception, e:
             return None
-        urls = self.duplicateFilter(child.stdout.read())
+        urls = self.duplicateFilter(output[0])
+        #urls = self.duplicateFilter(output)
         for i in urls:
             if i not in self.readUrls:
                 self.db.insert(dict([['link',i.decode("unicode_escape")]]))
