@@ -105,7 +105,7 @@ if (system.args.length !== 2){
             })();
             // 获取a标签的href值
             atags = document.getElementsByTagName("a");
-            
+
             for (var i=0; i<atags.length; i++){
                 if (atags[i].getAttribute("href")){
                     links += getAbsoluteUrl(atags[i].getAttribute("href"))+'\n';
