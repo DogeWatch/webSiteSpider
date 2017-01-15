@@ -7,7 +7,6 @@ if (system.args.length !== 2){
     // 初始化
     page.settings.resourceTimeout = 30000;
     page.settings.loadImage = false;
-    page.settings.XSSAuditingEnable = true;
     page.settings.userAgent = 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/37.0.2062.120 Safari/537.36';
     page.customHeaders = {
         "Connection" : "keep-alive",
@@ -112,6 +111,13 @@ if (system.args.length !== 2){
                     links += getAbsoluteUrl(atags[i].getAttribute("href"))+'\n';
                 }
             }
+            // 获取iframe标签的src值
+            iframetag = document.getElementsByTagName("iframe");
+            for (var i=0; i<iframetag.length; i++){
+                if (iframetag[i].getAttribute("src")){
+                    links += getAbsoluteUrl(iframetag[i].getAttribute("src"))+'\n';
+                }
+            }
             // 获取表单链接
             ftags = document.getElementsByTagName("form");
             for (var i=0; i<ftags.length; i++){
@@ -135,8 +141,16 @@ if (system.args.length !== 2){
                         }
                     }
                 }
-                links += link.substr(0, link.length-1) + '\n';
+                links += link.substr(0, link.length-1) + '\n';     
             }
+
+            document.addEventListener('DOMNodeInserted', function(e) {
+                var node = e.target;
+                if(node.src || node.href){
+                    links += (node.src || node.href)+'\n';
+                }
+            }, true);
+
             return links;
         });
         //输出获取到的所有URL

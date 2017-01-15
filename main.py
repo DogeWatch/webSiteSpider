@@ -64,6 +64,7 @@ class Crawler(object):
             self.urls[urldict['host']] = {urldict['path']:[urldict['param']]}
             return True
         else:
+            #判断是否为伪静态路径
             index = self.find_last(urldict['path'], '/')
             if urldict['path'][index+1:].isdigit():
                 urldict['path'] = urldict['path'][:index+1]
@@ -110,7 +111,7 @@ class Crawler(object):
         for r in list(set(result.split('\n'))):
             if r != '':
                 urldict = parseurl(r).getParse()
-                if urldict['host'] == self.domain:
+                if self.domain in urldict['host']:
                     if urldict not in temp:
                         temp.append(urldict)
         for x in temp:
