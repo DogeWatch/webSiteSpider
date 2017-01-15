@@ -123,9 +123,10 @@ class Crawler(object):
         print '[*] Current url is %s' % url
         try:
             child = subprocess32.Popen(['phantomjs', 'phantomjs.js', url], stdout=subprocess32.PIPE)
-            output = child.communicate(None, timeout=10)
+            output = child.communicate(None, timeout=30)
             #output = subprocess32.check_output(['phantomjs', 'phantomjs.js', url], timeout=10)
         except Exception, e:
+            os.kill(child.pid,9)
             return None
         urls = self.duplicateFilter(output[0])
         #urls = self.duplicateFilter(output)
