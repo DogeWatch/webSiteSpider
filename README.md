@@ -6,5 +6,6 @@ Options:
   -h, --help  show this help message and exit  
   -u URL      Specify the begin url.  
   -d DEPTH    Specify the crawling depth. Default: 5.  
-  -t THREAD   The amount of threads. Default: 10.  
+  -t THREAD   The amount of threads. Default: 10. 
+  -d dark     specify how to on darkmode on the website.
 
