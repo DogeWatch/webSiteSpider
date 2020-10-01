@@ -1,6 +1,8 @@
-This is a URL crawler.
+An Awesome Url Crawler: (Developed Using Python)
 
+How to Use ?
 Usage: main.py -u url -d depth
+
 
 Options:  
   -h, --help  show this help message and exit  
