@@ -1,4 +1,4 @@
-This is a URL crawler.
+A Cool Python made URL Crwaler.
 
 Usage: main.py -u url -d depth
 
