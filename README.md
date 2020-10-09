@@ -9,4 +9,6 @@ Options:
   -u URL      Specify the begin url.  
   -d DEPTH    Specify the crawling depth. Default: 5.  
   -t THREAD   The amount of threads. Default: 10.  
+  
+  Licence
 
